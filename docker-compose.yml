@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+  # MySQL 8.0 数据库服务
+  mysql:
+    image: mysql:8.0
+    container_name: powerbank-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: powerbank
+      TZ: Asia/Shanghai
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/src/main/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-time-zone=+08:00
+      - --innodb-buffer-pool-size=256M
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot123"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - powerbank-network
+    restart: unless-stopped
+
+  # 后端服务（Spring Boot）
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: powerbank-backend
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: powerbank
+      DB_USER: root
+      DB_PASS: root123
+      JWT_SECRET: powerbank-secret-key-must-be-at-least-256-bits-long-for-hs256
+      TZ: Asia/Shanghai
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - powerbank-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 用户前端服务（Vue 3）
+  frontend-user:
+    build:
+      context: ./frontend-user
+      dockerfile: Dockerfile
+    container_name: powerbank-frontend-user
+    ports:
+      - "8081:80"
+    environment:
+      TZ: Asia/Shanghai
+    depends_on:
+      - backend
+    networks:
+      - powerbank-network
+    restart: unless-stopped
+
+  # 管理后台服务（Vue 3 + Element Plus）
+  frontend-admin:
+    build:
+      context: ./frontend-admin
+      dockerfile: Dockerfile
+    container_name: powerbank-frontend-admin
+    ports:
+      - "8082:80"
+    environment:
+      TZ: Asia/Shanghai
+    depends_on:
+      - backend
+    networks:
+      - powerbank-network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+    name: powerbank-mysql-data
+
+networks:
+  powerbank-network:
+    name: powerbank-network
+    driver: bridge
