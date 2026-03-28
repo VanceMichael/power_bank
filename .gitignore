@@ -1,0 +1,30 @@
+# Java / Maven
+backend/target/
+backend/*.jar
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+
+# Node
+frontend-user/node_modules/
+frontend-user/dist/
+frontend-admin/node_modules/
+frontend-admin/dist/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+mysql_data/
+
+# Logs
+*.log

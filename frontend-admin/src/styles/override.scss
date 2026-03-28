@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
+
+/* ===== 全局 Reset ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { margin: 0; padding: 0; font-family: 'DM Sans', 'Noto Sans SC', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; background: #F8F9FC; }
+
+/* ===== Element Plus 主题色全面覆盖 ===== */
+:root {
+  --el-color-primary: #6366F1;
+  --el-color-primary-light-3: #818CF8;
+  --el-color-primary-light-5: #A5B4FC;
+  --el-color-primary-light-7: #C7D2FE;
+  --el-color-primary-light-8: #E0E7FF;
+  --el-color-primary-light-9: #EEF2FF;
+  --el-color-primary-dark-2: #4F46E5;
+  --el-color-success: #10B981;
+  --el-color-success-light-3: #34D399;
+  --el-color-success-light-5: #6EE7B7;
+  --el-color-success-light-9: #D1FAE5;
+  --el-color-warning: #F59E0B;
+  --el-color-warning-light-3: #FBBF24;
+  --el-color-warning-light-5: #FCD34D;
+  --el-color-warning-light-9: #FEF3C7;
+  --el-color-danger: #EF4444;
+  --el-color-danger-light-3: #F87171;
+  --el-color-danger-light-5: #FCA5A5;
+  --el-color-danger-light-9: #FEE2E2;
+  --el-color-info: #8E8EA0;
+  --el-bg-color: #F8F9FC;
+  --el-bg-color-overlay: #FFFFFF;
+  --el-text-color-primary: #1E1E2E;
+  --el-text-color-regular: #4A4A5A;
+  --el-text-color-secondary: #8E8EA0;
+  --el-text-color-placeholder: #B4B4C4;
+  --el-border-color: #E8E8EF;
+  --el-border-color-light: #F0F0F6;
+  --el-border-radius-base: 8px;
+  --el-border-radius-small: 6px;
+  --el-font-family: 'DM Sans', 'Noto Sans SC', -apple-system, sans-serif;
+  --el-font-size-base: 14px;
+  --el-box-shadow: 0 4px 16px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+  --el-box-shadow-light: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+  /* 自定义变量 */
+  --primary: #6366F1;
+  --primary-bg: rgba(99,102,241,0.08);
+  --font: 'DM Sans', 'Noto Sans SC', -apple-system, sans-serif;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+  --radius: 12px;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body { font-family: var(--font); -webkit-font-smoothing: antialiased; }
+
+/* ===== 按钮 ===== */
+.el-button--primary { box-shadow: 0 2px 8px rgba(99,102,241,0.3); }
+.el-button--primary:hover { box-shadow: 0 4px 14px rgba(99,102,241,0.4); }
+.el-button { border-radius: 8px; font-weight: 500; transition: all 0.2s ease; font-family: var(--font); }
+.el-button:active { transform: scale(0.97); }
+
+/* ===== 输入框 ===== */
+.el-input__wrapper {
+  border-radius: 8px !important;
+  box-shadow: 0 0 0 1px var(--el-border-color) inset !important;
+  transition: all 0.2s ease !important;
+  &:hover { box-shadow: 0 0 0 1px #C7D2FE inset !important; }
+  &.is-focus { box-shadow: 0 0 0 1px var(--el-color-primary) inset, 0 0 0 3px rgba(99,102,241,0.12) !important; }
+}
+
+/* ===== 表格 ===== */
+.el-table { border-radius: var(--radius) !important; overflow: hidden; border: 1px solid var(--el-border-color-light); }
+.el-table th.el-table__cell { background: #F8F9FC !important; font-weight: 600; color: var(--el-text-color-secondary); font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; }
+.el-table tr:hover > td.el-table__cell { background: rgba(99,102,241,0.03) !important; }
+.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell { background: #FAFBFE !important; }
+.el-table td.el-table__cell, .el-table th.el-table__cell { border-bottom: 1px solid var(--el-border-color-light) !important; }
+
+/* ===== 卡片 ===== */
+.el-card { border-radius: var(--radius) !important; border: 1px solid var(--el-border-color-light) !important; transition: var(--transition); }
+.el-card.is-hover-shadow:hover { box-shadow: var(--shadow-md) !important; transform: translateY(-1px); }
+
+/* ===== 标签 ===== */
+.el-tag { border-radius: 6px; font-weight: 500; border: none !important; }
+.el-tag--small { padding: 2px 8px; font-size: 12px; }
+
+/* ===== 分页 ===== */
+.el-pagination { --el-pagination-hover-color: var(--el-color-primary); }
+.el-pagination .el-pager li { border-radius: 6px; font-weight: 500; }
+.el-pagination .el-pager li.is-active { background: var(--el-color-primary); color: #fff; }
+
+/* ===== 弹窗 ===== */
+.el-dialog { border-radius: 16px !important; }
+.el-dialog__header { padding: 20px 24px 16px !important; border-bottom: 1px solid var(--el-border-color-light); }
+.el-dialog__body { padding: 20px 24px !important; }
+.el-dialog__footer { padding: 12px 24px 20px !important; }
+.el-dialog__title { font-weight: 600; font-size: 16px; }
+
+/* ===== 下拉菜单 ===== */
+.el-select-dropdown, .el-dropdown-menu { border: none !important; box-shadow: var(--shadow-md) !important; border-radius: 10px !important; }
+.el-popper.is-light { border: none !important; }
+.el-popper.is-light .el-popper__arrow::before { border: none !important; }
+
+/* ===== 菜单 ===== */
+.el-menu { border-right: none !important; }
+.el-menu-item {
+  border-radius: 8px !important; margin: 2px 10px !important; height: 44px !important; line-height: 44px !important;
+  transition: all 0.2s ease !important; font-weight: 500 !important;
+  &:hover { background: rgba(255,255,255,0.08) !important; }
+  &.is-active { background: rgba(99,102,241,0.15) !important; color: #818CF8 !important; }
+}
+
+/* ===== 表单 ===== */
+.el-form-item__label { font-weight: 500; color: var(--el-text-color-secondary) !important; font-size: 13px !important; }
+
+/* ===== 加载 ===== */
+.el-loading-mask { border-radius: var(--radius); }
+
+/* ===== 动画 ===== */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up { animation: fadeUp 0.4s ease-out; }
